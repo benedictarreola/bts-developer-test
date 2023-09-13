@@ -1,6 +1,6 @@
 {
   "development": {
-    "SHOPIFY_FLAG_STORE": "themoonbase.myshopify.com",
+    "SHOPIFY_FLAG_STORE": "bts-developer-test-barreola.myshopify.com",
     "SHOPIFY_FLAG_PATH": "./"
   }
 }

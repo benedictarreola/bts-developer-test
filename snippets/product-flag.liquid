@@ -1,0 +1,28 @@
+{% assign isAnyVariantOnSale = false %}
+{% for variant in product.variants %}
+  {% if variant.compare_at_price > variant.price %}
+    {% assign isAnyVariantOnSale = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if product.tags.size > 0 or isAnyVariantOnSale == true %}
+  <div class="{{ position }} top-4 left-2 z-10">
+    {% for tag in product.tags %}
+      <div class="inline-block border bg-white border-red-500 text-red-500 rounded-full px-2 mr-1 mb-1">
+        {% assign words = tag | split: '-' %}
+        <span>
+          {% for word in words %}
+            {{ word | capitalize }}
+          {% endfor %}
+        </span>
+      </div>
+    {% endfor %}
+
+    {% if isAnyVariantOnSale %}
+      <div class="inline-block border bg-white border-red-500 text-red-500 rounded-full px-2 mr-1 mb-1">
+        <span>Sale</span>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

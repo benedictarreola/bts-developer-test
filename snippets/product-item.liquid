@@ -1,0 +1,65 @@
+<form
+  method="post"
+  action="/cart/add"
+  class="block relative"
+>
+  <div class="group relative">
+    {% include 'product-flag' with position: 'absolute' %}
+    <div class="w-full relative overflow-hidden mb-2 border border-contrast-light pt-full z-1">
+      <img
+        class="object-cover object-center h-full w-full absolute inset-0"
+        src="{{ product.featured_image.src | img_url: 'medium' }}"
+        alt="{{ product.title }}"
+      >
+    </div>
+    {% include 'product-quick-add' %}
+  </div>
+
+  <p class="text-gray-600 mb-1">{{ product.vendor }}</p>
+  <h3 class="text-xl">
+    <span>{{- product.title -}}</span>
+    •
+    <span class="product-variant-title-{{ product.id }}">
+      {{- product.selected_or_first_available_variant.title | capitalize -}}
+    </span>
+  </h3>
+  <p class="text-xl mb-2">
+    <span class="product-compare-at-price-{{ product.id }} text-red-500 line-through">
+      {{- product.selected_or_first_available_variant.compare_at_price | money -}}
+    </span>
+    <span class="product-price-{{ product.id }}">
+      {{- product.selected_or_first_available_variant.price | money -}}
+    </span>
+  </p>
+  <p class="text-gray-600 mb-5">{{ product.description | truncate: 58 }}</p>
+
+  {% for variant in product.variants %}
+    <input
+      min="1"
+      type="hidden"
+      id="quantity"
+      name="quantity"
+      value="1"
+    >
+    <div class="inline-block group relative">
+      <input
+        class="variant-input-{{ variant.id }} inline-block border h-4 w-4 rounded-full mr-1 appearance-none ring-1 ring-inset ring-white checked:border-neutral-500 hover:cursor-pointer"
+        style="background: {{ variant.title }}"
+        data-product-id="{{ product.id }}"
+        data-variant-id="{{ variant.id }}"
+        data-variant-name="{{ variant.title | capitalize }}"
+        data-compare-at-price="{{ variant.compare_at_price | money }}"
+        data-price="{{ variant.price | money }}"
+        type="radio"
+        name="id"
+        value="{{ variant.id }}"
+        {% if forloop.first %}
+          checked
+        {% endif %}
+      >
+      <p class="hidden lg:group-hover:block text-sm bg-neutral-800 px-1 text-white absolute bottom-5 left-3 z-10">
+        {{ variant.title | capitalize }}
+      </p>
+    </div>
+  {% endfor %}
+</form>

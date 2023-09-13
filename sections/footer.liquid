@@ -3,13 +3,19 @@
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'newsletter' -%}
-          <div class="col-span-12 md:col-span-4 md:pr-10 mb-12">
+          <div class="col-span-12 md:col-span-6 md:pr-10 mb-12">
             <h3 class="text-base font-heading text-center md:text-left mb-6">{{ block.settings.title | escape }}</h3>
             {%- if block.settings.content -%}
-              <p class="text-sm font-body leading-relaxed mb-6 text-center md:text-left text-contrast-dark">{{ block.settings.content }}</p>
+              <p class="text-sm font-body leading-relaxed mb-6 text-center md:text-left text-contrast-dark">
+                {{ block.settings.content }}
+              </p>
             {%- endif -%}
             {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input
+                type="hidden"
+                name="contact[tags]"
+                value="newsletter"
+              >
               <div class="newsletter-form__field-wrapper">
                 <div class="field flex shadow-md shadow-neutral-100">
                   <input
@@ -40,7 +46,7 @@
                     aria-label="{{ 'newsletter.label' | t }}"
                   >
                     {{ 'newsletter.label' | t }}
-                    {% render 'icon', type: 'arrow', class: 'h-4 w-4' %}
+                    {% comment %} {% render 'icon', type: 'arrow', class: 'h-4 w-4' %} {% endcomment %}
                   </button>
                 </div>
                 {%- if form.errors -%}
@@ -63,7 +69,7 @@
             {%- endform -%}
           </div>
         {%- when 'linklist' -%}
-          <div class="col-span-6 md:col-span-2">
+          <div class="col-span-6 md:col-span-3">
             <div>
               <h3 class="font-heading text-base mb-4">{{ linklists[block.settings.linklist].title }}</h3>
               <ul>

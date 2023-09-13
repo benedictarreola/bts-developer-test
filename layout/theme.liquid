@@ -7,21 +7,27 @@
     <link
       rel="preconnect"
       href="https://cdn.shopify.com"
-      crossorigin>
+      crossorigin
+    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
       rel="preconnect"
       href="https://fonts.gstatic.com"
-      crossorigin>
+      crossorigin
+    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Mono:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Mono:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
     {{ 'bundle.css' | asset_url | stylesheet_tag: preload: true }}
 
     {% if settings.favicon %}
       <link
         rel="shortcut icon"
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-        type="image/png">
+        type="image/png"
+      >
     {% endif %}
 
     <title>{{ page_title | escape }}</title>
@@ -36,8 +42,12 @@
   </head>
 
   <body class="{{ template.name }}">
-    <div {% unless request.page_type == 'captcha' %}id="app"{% endunless %}>
-      {% sections 'header-group' %}
+    <div
+      {% unless request.page_type == 'captcha' %}
+        id="app"
+      {% endunless %}
+    >
+      {% section 'header' %}
       <main id="main" role="main">
         {{ content_for_layout }}
       </main>
@@ -46,6 +56,10 @@
 
     <!-- webpack bundle -->
     <script>
+      
+      
+      
+      
       window.Moonbase = window.Moonbase || {};
       Moonbase.template = {{ template | json }};{%- case template.name -%}
       {%- when 'collection' -%}
@@ -66,6 +80,9 @@
       Moonbase.paths = {
         header: `{{ 'moonbase-header.js' | asset_url | json }}`
       }
+
+
+
     </script>
     <script src="{{ 'moonbase-main.js' | asset_url }}" defer="defer"></script>
   </body>

@@ -1,0 +1,55 @@
+<div class="container grid grid-cols-12 py-12">
+  <h2 class="col-span-12 text-base font-heading mb-4">{{ section.settings.title }}</h2>
+  {% if section.settings.collection.products.size == 0 %}
+    <p class="col-span-12 text-center text-gray-600">No products at the moment</p>
+  {% else %}
+    {% comment %} START - Desktop Product Gallery {% endcomment %}
+    <div class="hidden lg:col-span-12 lg:grid lg:grid-cols-12 lg:gap-4 lg:block">
+      {% for product in section.settings.collection.products %}
+        <div class="col-span-3 mb-4">
+          {% include 'product-item' %}
+        </div>
+      {% endfor %}
+    </div>
+    {% comment %} END - Desktop Product Gallery {% endcomment %}
+
+    {% comment %} START - Mobile Product Gallery {% endcomment %}
+    <div class="col-span-12 block lg:hidden">
+      <div class="swiper swiper--product-item-gallery">
+        <div class="swiper-wrapper">
+          {% for product in section.settings.collection.products %}
+            <div class="swiper-slide">
+              {% include 'product-item' %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% comment %} END - Mobile Product Gallery {% endcomment %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "featured-collection",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

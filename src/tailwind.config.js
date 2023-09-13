@@ -43,7 +43,10 @@ module.exports = {
           dark: '#747473',
           darkest: '#000000'
         }
-      }
+      },
+      padding: {
+        'full': '100%',
+      },
     },
     fontFamily: {
       sans: ['Helvetica', 'Arial', 'sans-serif'],

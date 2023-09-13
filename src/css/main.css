@@ -10,12 +10,17 @@
 /**
  * Tailwind CSS Required Files
 **/
-@import "tailwindcss/base"; 
+@import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 /**
+ * Swiper
+**/
+@import "swiper/swiper-bundle";
+
+/**
  * Layout
-**/ 
+**/
 @import 'layout/_header';
 @import 'layout/_footer';

@@ -1,0 +1,17 @@
+<div class="container grid grid-cols-12 py-12">
+  <h2 class="col-span-12 text-base font-heading mb-4">Cart</h2>
+  {% if cart.items.size == 0 %}
+    <p class="col-span-12 text-center text-gray-600">No items at the moment</p>
+  {% else %}
+    <div class="col-span-12">
+      {% for line_item in cart.items %}
+        <div class="mb-2">
+          <span>{{- line_item.product.title -}}</span>
+          •
+          <span>{{- line_item.variant.title | capitalize -}}</span>
+          <span>x {{ line_item.quantity }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
